@@ -4,6 +4,9 @@ from time import sleep
 import smtplib
 from email.message import EmailMessage
 
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.96 Mobile Safari/537.36'}
+
 
 def sendMail():
     msg = EmailMessage()
@@ -26,7 +29,7 @@ def sendMail():
     """.format(url), subtype='html')
     # better methode than SMTP
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        # login with your email and password 
+        # login with your email and password
         smtp.login('Your Email Address', 'Your Password')
         # send the message
         smtp.send_message(msg)
@@ -39,7 +42,7 @@ def getDomain():
 
 def makeRequest():
     # make request
-    response = get(url)
+    response = get(url, headers=headers)
     # init parses
     soup = BeautifulSoup(response.text, 'html.parser')
     # get the right className
@@ -47,7 +50,7 @@ def makeRequest():
     # make instance
     instan = soup.find(class_=className).get_text()
     # loop throw the result to get price
-    e=''
+    e = ''
     for i in instan:
         try:
             int(i)
@@ -60,26 +63,26 @@ def makeRequest():
 def checkClass():
     domainName = getDomain()
     if domainName == 'jumia':
-        return  '-b -ltr -tal -fs24'
+        return '-b -ltr -tal -fs24'
     elif domainName == 'souq':
         return 'price is sk-clr1'
     else:
         print('ERROR : Souq Or Jumia Only')
         exit()
 
-    
+
 def jumiaPrice():
-    price=makeRequest()
-    return int(price)
+    price = makeRequest()
+    return float(price)
 
 
 def souqPrice():
-    price=makeRequest()[:-2]
-    return int(price)
+    price = makeRequest()[:-2]
+    return float(price)
 
 
 def checkPrice():
-    domain=getDomain()
+    domain = getDomain()
     if domain == 'jumia':
         return jumiaPrice()
     else:
@@ -88,7 +91,7 @@ def checkPrice():
 
 def checkBudget():
     # get user budget
-    budget =int(input('Your Budget (Numbers) => '))  
+    budget = int(input('Your Budget (Numbers) => '))
     if price < budget:
         print('========YES========')
         sendMail()
