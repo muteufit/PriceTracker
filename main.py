@@ -9,9 +9,9 @@ def main():
     webc = WebsiteController(url)
     budget = int(input('Your Budget (Numbers) => '))
     up = UserBudget(budget)
-    while:
+    while True:
         op = webc.getPrice()
-        compare = UserBudget.compare(op)
+        compare = up.compare(op)
         if compare[0]:
             ms = MailSender('sender@example.com', '******',
                             'reciever@example.com')

@@ -8,6 +8,6 @@ class UserBudget:
 
     def compare(self, price):
         if price <= self.budget:
-            return [True, budget-price]
+            return [True, self.budget-price]
         else:
             return [False, price-budget]
