@@ -10,4 +10,4 @@ class UserBudget:
         if price <= self.budget:
             return [True, self.budget-price]
         else:
-            return [False, price-budget]
+            return [False, price-self.budget]

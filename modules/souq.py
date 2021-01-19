@@ -1,5 +1,6 @@
 from requests import get
 from bs4 import BeautifulSoup
+import re
 
 
 class Souq:
@@ -16,4 +17,6 @@ class Souq:
         soup = BeautifulSoup(response.text, 'html.parser')
         # make instance
         instan = soup.find(class_='price is sk-clr1').get_text(strip=True)
-        return float(instan.replace('EGP', '').replace(',', ''))
+        # return float(instan.replace('EGP', '').replace(',', ''))
+        # print(re.sub(r'[a-zA-Z+,]', '', instan))
+        return float(re.sub(r'[a-zA-Z+,]', '', instan))

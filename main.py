@@ -18,6 +18,10 @@ def main():
             ms.sendMail('you can buy it now',
                         'save up to {}'.format(compare[1]), 'alternate')
             break
+        print('==================================')
+        print('= You Need {} more To Buy.'.format(compare[1]))
+        print('= We\'re Trying Again in an Hour ')
+        print('==================================')
         sleep(3600)
 
 
