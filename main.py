@@ -1,6 +1,7 @@
 from modules.user_budget import UserBudget
 from modules.website_controller import WebsiteController
 from modules.send_mail import MailSender
+from time import sleep
 
 
 def main():
@@ -17,6 +18,7 @@ def main():
             ms.sendMail('you can buy it now',
                         'save up to {}'.format(compare[1]), 'alternate')
             break
+        sleep(3600)
 
 
 if __name__ == "__main__":
