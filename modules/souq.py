@@ -13,6 +13,8 @@ class Souq:
     def price(self):
         # make request
         response = get(self.url, headers=self.headers)
+        if response.status_code != 200:
+            raise Exception('{} Error Check Your Request'.fromat(response.status_code))
         # init parses
         soup = BeautifulSoup(response.text, 'html.parser')
         # make instance

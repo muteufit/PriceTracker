@@ -12,6 +12,8 @@ class Jumia:
 
     def price(self):
         res = get(self.url, headers=self.headers)
+        if res.status_code != 200:
+            raise Exception('{} Error Check Your Request'.fromat(response.status_code))
         soup = BeautifulSoup(res.text, 'html.parser')
         scripts = soup.find_all('script')
         script = scripts[2].contents
